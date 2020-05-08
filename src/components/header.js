@@ -18,14 +18,12 @@ const StyledHeader = styled.header`
   flex-direction: row;
   padding: 10px;
   transition: all 300ms;
+  background: rgba(0, 0, 0, 0);
 
   ${({ windowScrollY, windowWidth }) => {
-    if (windowScrollY < scrollBreakpoint) {
-      return `
-        background: rgba(0, 0, 0, 0);
-      `
+    if (windowScrollY > scrollBreakpoint) {
+      return `background: rgba(0, 0, 0, 0.42);`
     }
-    return `background: rgba(0, 0, 0, 0.42);`
   }}
 `
 
@@ -34,6 +32,7 @@ const MainTitle = styled.h1`
   font-family: Lobster, serif;
   font-weight: 400;
   margin: 0;
+  transform: translateX(${windowWidth / 2 - 115}px);
 
   ${({ windowScrollY, windowWidth }) => {
     if (windowScrollY > scrollBreakpoint) {
@@ -41,9 +40,6 @@ const MainTitle = styled.h1`
         transform: translateX(0);
       `
     }
-    return `
-      transform: translateX(${windowWidth / 2 - 115}px);
-    `
   }};
 `
 
@@ -51,6 +47,7 @@ const LogoWrapper = styled.div`
   width: 28px;
   margin-right: 6px;
   transition: all 300ms;
+  transform: translateY(160px) translateX(calc(100vw / 2 - 150px)) scale(6);
 
   ${({ windowScrollY, windowWidth }) => {
     if (windowScrollY > scrollBreakpoint) {
@@ -111,10 +108,6 @@ const Header = ({ siteTitle }) => {
 
   return (
     <StyledHeader windowScrollY={windowScrollY} windowWidth={windowWidth}>
-      <DebugBox>
-        <div>windowScrollY: {windowScrollY};</div>
-        <div>windowWidth: {windowWidth};</div>
-      </DebugBox>
       <LogoWrapper windowScrollY={windowScrollY} windowWidth={windowWidth}>
         <img src={LogoSVG} />
       </LogoWrapper>

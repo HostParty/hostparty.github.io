@@ -85,6 +85,10 @@ const LogoWrapper = styled.div`
   }
 `
 
+const DebugBox = styled.div`
+  display: none;
+`
+
 const DownloadButton = styled.a`
   transition: all 300ms;
   box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
@@ -107,6 +111,10 @@ const Header = ({ siteTitle }) => {
 
   return (
     <StyledHeader windowScrollY={windowScrollY} windowWidth={windowWidth}>
+      <DebugBox>
+        <div>windowScrollY: {windowScrollY};</div>
+        <div>windowWidth: {windowWidth};</div>
+      </DebugBox>
       <LogoWrapper windowScrollY={windowScrollY} windowWidth={windowWidth}>
         <img src={LogoSVG} />
       </LogoWrapper>

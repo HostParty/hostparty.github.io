@@ -21,7 +21,7 @@ const StyledHeader = styled.header`
   background: rgba(0, 0, 0, 0);
 
   ${({ windowScrollY, windowWidth }) => {
-    if (windowScrollY > scrollBreakpoint) {
+    if (typeof window !== `undefined` && windowScrollY > scrollBreakpoint) {
       return `background: rgba(0, 0, 0, 0.42);`
     }
   }}
@@ -32,14 +32,14 @@ const MainTitle = styled.h1`
   font-family: Lobster, serif;
   font-weight: 400;
   margin: 0;
-  transform: translateX(${windowWidth / 2 - 115}px);
 
   ${({ windowScrollY, windowWidth }) => {
-    if (windowScrollY > scrollBreakpoint) {
+    if (typeof window !== `undefined` && windowScrollY > scrollBreakpoint) {
       return `
         transform: translateX(0);
       `
     }
+    return `transform: translateX(${windowWidth / 2 - 115}px);`
   }};
 `
 
@@ -50,12 +50,11 @@ const LogoWrapper = styled.div`
   transform: translateY(160px) translateX(calc(100vw / 2 - 150px)) scale(6);
 
   ${({ windowScrollY, windowWidth }) => {
-    if (windowScrollY > scrollBreakpoint) {
+    if (typeof window !== `undefined` && windowScrollY > scrollBreakpoint) {
       return `
         transform: translateY(0) translateX(0) scale(1);
       `
     }
-
     let scaleValue = 4
     if (windowWidth > breakpoints.medium) {
       scaleValue = 5
@@ -74,7 +73,7 @@ const LogoWrapper = styled.div`
       windowWidth / 2 - 150
     }px) scale(${scaleValue});
       `
-  }}
+  }}}
 
   img {
     width: 100%;
@@ -91,7 +90,7 @@ const DownloadButton = styled.a`
   box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
 
   ${({ windowScrollY, windowWidth }) => {
-    if (windowScrollY > scrollBreakpoint) {
+    if (typeof window !== `undefined` && windowScrollY > scrollBreakpoint) {
       return `
         transform: translateX(-10px) translateY(0);
       `

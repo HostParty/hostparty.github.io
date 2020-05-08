@@ -36,11 +36,6 @@ async function main() {
 
       if (response) {
         const data = yaml.safeLoad(Buffer.from(response.data))
-        console.log({ data, files: data.files })
-        console.log(
-          "file size",
-          `${(data.files[0].size / 1024 / 1024).toFixed(2)}MB`
-        )
         return {
           ...data,
           ...platform,

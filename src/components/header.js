@@ -36,11 +36,14 @@ const MainTitle = styled.h1`
   margin: 0;
 
   ${({ windowScrollY, windowWidth }) => {
-    if (windowScrollY < scrollBreakpoint) {
+    if (windowScrollY > scrollBreakpoint) {
       return `
-        transform: translateX(${windowWidth / 2 - 115}px);
+        transform: translateX(0);
       `
     }
+    return `
+      transform: translateX(${windowWidth / 2 - 115}px);
+    `
   }};
 `
 
@@ -50,26 +53,30 @@ const LogoWrapper = styled.div`
   transition: all 300ms;
 
   ${({ windowScrollY, windowWidth }) => {
-    if (windowScrollY < scrollBreakpoint) {
-      let scaleValue = 4
-      if (windowWidth > breakpoints.medium) {
-        scaleValue = 5
-      }
-      if (windowWidth > breakpoints.large) {
-        scaleValue = 6
-      }
-
-      let translateYValue = 130
-      if (windowWidth > breakpoints.large) {
-        translateYValue = 160
-      }
-
+    if (windowScrollY > scrollBreakpoint) {
       return `
-        transform: translateY(${translateYValue}px) translateX(${
-        windowWidth / 2 - 150
-      }px) scale(${scaleValue});
+        transform: translateY(0) translateX(0) scale(1);
       `
     }
+
+    let scaleValue = 4
+    if (windowWidth > breakpoints.medium) {
+      scaleValue = 5
+    }
+    if (windowWidth > breakpoints.large) {
+      scaleValue = 6
+    }
+
+    let translateYValue = 130
+    if (windowWidth > breakpoints.large) {
+      translateYValue = 160
+    }
+
+    return `
+        transform: translateY(${translateYValue}px) translateX(${
+      windowWidth / 2 - 150
+    }px) scale(${scaleValue});
+      `
   }}
 
   img {
@@ -81,14 +88,16 @@ const LogoWrapper = styled.div`
 const DownloadButton = styled.a`
   transition: all 300ms;
   box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
-  transform: translateX(-10px);
 
   ${({ windowScrollY, windowWidth }) => {
-    if (windowScrollY < scrollBreakpoint) {
+    if (windowScrollY > scrollBreakpoint) {
       return `
-        transform: translateX(-${windowWidth / 2 - 80}px) translateY(250px);
+        transform: translateX(-10px) translateY(0);
       `
     }
+    return `
+        transform: translateX(-${windowWidth / 2 - 80}px) translateY(250px);
+      `
   }}
 `
 

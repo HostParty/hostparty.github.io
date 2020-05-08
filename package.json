@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "hostparty",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "Twitch bot app for hackathons, etc.",
+  "version": "0.1.1",
+  "author": "Chris Griffing <cmgriffing@gmail.com>",
   "dependencies": {
     "@ant-design/icons": "^4.1.0",
     "antd": "^4.2.0",

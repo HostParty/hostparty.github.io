@@ -10,19 +10,35 @@ import { breakpoints } from "../variables/breakpoints"
 
 const scrollBreakpoint = 30
 
+// const StickyHeader = styled.header`
+//   top: 0;
+//   width: 100%;
+//   display: flex;
+//   flex-direction: row;
+//   padding: 10px;
+//   transition: all 300ms;
+//   background: rgba(0, 0, 0, 0);
+
+//   ${({ windowScrollY, windowWidth }) => {
+//     if (typeof window !== `undefined` && windowScrollY > scrollBreakpoint) {
+//       return `background: rgba(0, 0, 0, 0.42);`
+//     }
+//   }}
+// `
+
 const StyledHeader = styled.header`
-  position: fixed;
+  position: absolute;
   top: 0;
   width: 100%;
   display: flex;
   flex-direction: row;
   padding: 10px;
-  transition: all 300ms;
+  transition: background 300ms;
   background: rgba(0, 0, 0, 0);
 
   ${({ windowScrollY, windowWidth }) => {
     if (typeof window !== `undefined` && windowScrollY > scrollBreakpoint) {
-      return `background: rgba(0, 0, 0, 0.42);`
+      return `top: ${windowScrollY}px; background: rgba(0, 0, 0, 0.42);`
     }
   }}
 `
@@ -32,6 +48,7 @@ const MainTitle = styled.h1`
   font-family: Lobster, serif;
   font-weight: 400;
   margin: 0;
+  transform: translateX(calc(100vw / 2 - 115px));
 
   ${({ windowScrollY, windowWidth }) => {
     if (typeof window !== `undefined` && windowScrollY > scrollBreakpoint) {
@@ -73,7 +90,7 @@ const LogoWrapper = styled.div`
       windowWidth / 2 - 150
     }px) scale(${scaleValue});
       `
-  }}}
+  }}
 
   img {
     width: 100%;
@@ -88,6 +105,7 @@ const DebugBox = styled.div`
 const DownloadButton = styled.a`
   transition: all 300ms;
   box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+  transform: translateX(calc(100vw / -2 + 80px)) translateY(250px);
 
   ${({ windowScrollY, windowWidth }) => {
     if (typeof window !== `undefined` && windowScrollY > scrollBreakpoint) {
@@ -95,9 +113,6 @@ const DownloadButton = styled.a`
         transform: translateX(-10px) translateY(0);
       `
     }
-    return `
-        transform: translateX(-${windowWidth / 2 - 80}px) translateY(250px);
-      `
   }}
 `
 

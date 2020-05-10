@@ -1,30 +1,10 @@
-import PropTypes from "prop-types"
-import React from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
-import { Button } from "antd"
 
 import downloadFiles from "../data/releases.json"
 
 const baseDownloadUrl =
   "https://github.com/HostParty/HostParty/releases/latest/download/"
-
-let OSName = "Windows"
-try {
-  if (navigator.appVersion.indexOf("Win") !== -1) OSName = "Windows"
-  if (navigator.appVersion.indexOf("Mac") !== -1) OSName = "MacOS"
-  if (navigator.appVersion.indexOf("X11") !== -1) OSName = "UNIX"
-  if (navigator.appVersion.indexOf("Linux") !== -1) OSName = "Linux"
-} catch (e) {
-  console.log("Could not determine OS. Defaulting to Windows.")
-}
-
-const currentPlatform = downloadFiles.filter(platformDownload => {
-  return platformDownload.displayName === OSName
-})[0]
-
-const otherPlatforms = downloadFiles.filter(platformDownload => {
-  return platformDownload.displayName !== OSName
-})
 
 const CurrentPlatformItem = styled.div`
   display: flex;
@@ -64,6 +44,31 @@ const HR = styled.hr`
 `
 
 const Downloads = props => {
+  const [currentPlatform, setCurrentPlatform] = useState(downloadFiles[0])
+  const [otherPlatforms, setOtherPlatforms] = useState([])
+
+  useEffect(() => {
+    let OSName = currentPlatform
+    try {
+      if (navigator.appVersion.indexOf("Win") !== -1) OSName = "Windows"
+      if (navigator.appVersion.indexOf("Mac") !== -1) OSName = "MacOS"
+      if (navigator.appVersion.indexOf("X11") !== -1) OSName = "UNIX"
+      if (navigator.appVersion.indexOf("Linux") !== -1) OSName = "Linux"
+    } catch (e) {
+      console.log("Could not determine OS. Defaulting to Windows.")
+    }
+
+    const _currentPlatform = downloadFiles.filter(platformDownload => {
+      return platformDownload.displayName === OSName
+    })[0]
+
+    const _otherPlatforms = downloadFiles.filter(platformDownload => {
+      return platformDownload.displayName !== OSName
+    })
+    setCurrentPlatform(_currentPlatform)
+    setOtherPlatforms(_otherPlatforms)
+  }, [])
+
   return (
     <DownloadsRow>
       <CurrentPlatformItem>
@@ -71,7 +76,6 @@ const Downloads = props => {
           <h3>Current Platform: </h3>
           <a
             href={baseDownloadUrl + currentPlatform.path}
-            download="true"
             className="ant-btn ant-btn-primary"
             target="_blank"
             download

@@ -92,7 +92,7 @@ const Downloads = props => {
       <OtherDownloadsRow>
         {otherPlatforms.map(platform => {
           return (
-            <OtherDownloadItem>
+            <OtherDownloadItem key={platform.displayName}>
               <h4>{platform.displayName}</h4>
               <div>
                 <div>{platform.fileSize}</div>

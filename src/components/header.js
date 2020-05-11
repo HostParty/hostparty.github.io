@@ -143,10 +143,10 @@ const Header = ({ siteTitle }) => {
       <FlexFill />
       <DownloadButton
         className="ant-btn ant-btn-primary"
+        href="#downloads"
         windowScrollY={windowScrollY}
         windowWidth={windowWidth}
         iAmAHack={iAmAHack}
-        onClick={() => {}}
       >
         Get it Now
       </DownloadButton>

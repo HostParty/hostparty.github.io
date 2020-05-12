@@ -2,7 +2,7 @@
   "name": "hostparty",
   "private": true,
   "description": "Twitch bot app for hackathons, etc.",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "author": "Chris Griffing <cmgriffing@gmail.com>",
   "dependencies": {
     "@ant-design/icons": "^4.1.0",

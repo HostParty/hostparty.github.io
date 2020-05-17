@@ -50,10 +50,12 @@ const Downloads = props => {
   useEffect(() => {
     let OSName = currentPlatform
     try {
-      if (navigator.appVersion.indexOf("Win") !== -1) OSName = "Windows"
-      if (navigator.appVersion.indexOf("Mac") !== -1) OSName = "MacOS"
-      if (navigator.appVersion.indexOf("X11") !== -1) OSName = "UNIX"
-      if (navigator.appVersion.indexOf("Linux") !== -1) OSName = "Linux"
+      if (navigator.appVersion.indexOf("Win") !== -1) {
+        OSName = "Windows"
+      } else if (navigator.appVersion.indexOf("Mac") !== -1) OSName = "MacOS"
+      else {
+        OSName = "Linux"
+      }
     } catch (e) {
       console.log("Could not determine OS. Defaulting to Windows.")
     }

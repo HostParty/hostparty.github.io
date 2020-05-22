@@ -35,14 +35,26 @@ const GettingStartedContainer = styled(Container)`
 `
 
 const HeroContent = styled.div`
-  width: 342px;
   margin: auto;
-  padding-left: 157px;
-  padding-top: 30px;
-  padding-bottom: 110px;
+  padding: 200px 10px 60px;
 
   h2 {
     font-size: 40px;
+  }
+  p {
+    min-height: 44px;
+  }
+
+  @media (min-width: ${breakpoints.small}px) and (max-width: ${breakpoints.medium +
+    1}px) {
+    text-align: center;
+  }
+
+  @media (min-width: ${breakpoints.medium}px) {
+    width: 342px;
+    padding-left: 157px;
+    padding-top: 30px;
+    padding-bottom: 110px;
   }
 `
 
@@ -167,9 +179,9 @@ const SupportContainer = styled(Container)`
 const gettingStartedSteps = [
   {
     imageUrl: "http://www.fillmurray.com/200/200",
-    title: "Enter Bot Credentials",
+    title: "Login via Twitch",
     details:
-      "It is best to use a dedicated bot account. Create one if you don't have one and get its OAuth token. We use this to let the bot chat in stream and connect to the Twitch API.",
+      "It is best to use a dedicated bot account. Create one if you don't have one and use it to log into the app via OAuth.",
     Icon: RobotFilled,
   },
   {
@@ -192,27 +204,132 @@ const HeroContainer = styled.div`
   position: relative;
 `
 
-const LeftScreenshot = styled.div`
+const HeroLeftScreenshot = styled.div`
   position: absolute;
   left: 15%;
   top: 0;
-  width: 400px;
+  width: 20%;
+  max-width: 400px;
+  display: none;
+
+  @media (min-width: ${breakpoints.xl}px) {
+    display: block;
+  }
+  @media (min-width: ${breakpoints.xxl}px) {
+    left: calc(50% - 600px);
+  }
 
   img {
     width: 100%;
+    transition: transform 1000ms;
     height: auto;
     border: 4px solid white;
     box-shadow: 0px 03px 20px rgba(0, 0, 0, 0.42);
     transform: perspective(400px) rotateY(32deg);
+
+    &:hover {
+      transform: perspective(400px) rotateY(12deg);
+    }
   }
 `
 
-const RightScreenshot = styled(LeftScreenshot)`
+const HeroRightScreenshot = styled(HeroLeftScreenshot)`
   left: auto;
   right: 15%;
 
+  @media (min-width: ${breakpoints.xxl}px) {
+    left: auto;
+    right: calc(50% - 600px);
+  }
+
   img {
     transform: perspective(400px) rotateY(-32deg);
+
+    &:hover {
+      transform: perspective(400px) rotateY(-12deg);
+    }
+  }
+`
+
+const MediaContainer = styled.div`
+  display: flex;
+  height: 300px;
+
+  @media (min-width: ${breakpoints.medium}px) {
+    height: 400px;
+  }
+`
+
+const MediaLeftScreenshot = styled.div`
+  width: 25%;
+  flex: 1 1 auto;
+  display: none;
+  align-items: center;
+
+  @media (min-width: ${breakpoints.large}px) {
+    display: flex;
+  }
+
+  @media (min-width: ${breakpoints.xl}px) {
+    display: none;
+  }
+
+  img {
+    width: 100%;
+    transition: transform 1000ms;
+    height: auto;
+    border: 4px solid white;
+    box-shadow: 0px 03px 20px rgba(0, 0, 0, 0.42);
+    transform: perspective(400px) rotateY(32deg);
+
+    &:hover {
+      transform: perspective(400px) rotateY(12deg);
+    }
+  }
+`
+
+const MediaRightScreenshot = styled(MediaLeftScreenshot)`
+  img {
+    transform: perspective(400px) rotateY(-32deg);
+
+    &:hover {
+      transform: perspective(400px) rotateY(-12deg);
+    }
+  }
+`
+
+const MediaVideoWrapper = styled.div`
+  width: 50%;
+  flex: 1 1 auto;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const MediaVideoContainer = styled.div`
+  iframe {
+    min-height: 180px;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0px 03px 20px rgba(0, 0, 0, 0.42);
+
+    @media (min-width: ${breakpoints.small}px) {
+      min-height: 280px;
+      margin-bottom: 20px;
+    }
+    @media (min-width: ${breakpoints.medium}px) {
+      min-height: 300px;
+      margin-bottom: 0;
+    }
+  }
+`
+
+const MobileScreenshot = styled.img`
+  width: 100%;
+
+  @media (min-width: ${breakpoints.large}) {
+    display: none;
   }
 `
 
@@ -223,27 +340,47 @@ const IndexPage = () => {
     <Layout>
       <SEO title="Home" />
       <HeroContainer>
-        <LeftScreenshot>
+        <HeroLeftScreenshot>
           <img src={LeftScreenshotImage} />
-        </LeftScreenshot>
+        </HeroLeftScreenshot>
         <HeroContent windowWidth={windowWidth}>
           <Container>
             <h2>Democracy In Action</h2>
             <p>Engage your audience better during your next hosted event</p>
           </Container>
         </HeroContent>
-        <RightScreenshot>
+        <HeroRightScreenshot>
           <img src={RightScreenshotImage} />
-        </RightScreenshot>
+        </HeroRightScreenshot>
       </HeroContainer>
+      <MediaContainer>
+        <MediaLeftScreenshot>
+          <img src={LeftScreenshotImage} />
+        </MediaLeftScreenshot>
+        <MediaVideoWrapper>
+          <MediaVideoContainer>
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/kN1Czs0m1SU"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </MediaVideoContainer>
+        </MediaVideoWrapper>
+        <MediaRightScreenshot>
+          <img src={RightScreenshotImage} />
+        </MediaRightScreenshot>
+      </MediaContainer>
       <ContentSection>
         <Container>
           <SectionIntro>
             <h2>How It Works</h2>
             <p>
               Are you hosting a hackathon, game jam, or live streamed
-              tournament? Use HostParty to showcase participants and let chat
-              vote on when move onto the next stream.
+              tournament? Use HostParty to showcase participants and let viewers
+              vote on when to move onto the next stream.
             </p>
           </SectionIntro>
           <HowItWorksSection>

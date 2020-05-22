@@ -39,11 +39,11 @@ const MainTitle = styled.h1`
   ${({ iAmAHack, windowWidth }) => {
     if (iAmAHack) {
       return `
-  transform: translateX(0);
+        transform: translateX(0);
       `
     }
     return `
-        transform: translateX(calc(100vw / 2 - 115px));`
+      transform: translateX(calc(100vw / 2 - 95px));`
   }};
 `
 
@@ -56,23 +56,30 @@ const LogoWrapper = styled.div`
 
   ${({ iAmAHack, windowWidth }) => {
     if (!iAmAHack) {
-      let scaleValue = 4
-      if (windowWidth > breakpoints.medium) {
-        scaleValue = 5
-      }
-      if (windowWidth > breakpoints.large) {
-        scaleValue = 6
-      }
+      if (windowWidth >= breakpoints.medium) {
+        let scaleValue = 4
+        if (windowWidth > breakpoints.medium) {
+          scaleValue = 5
+        }
+        if (windowWidth > breakpoints.large) {
+          scaleValue = 6
+        }
 
-      let translateYValue = 130
-      if (windowWidth > breakpoints.large) {
-        translateYValue = 160
-      }
+        let translateYValue = 130
+        if (windowWidth > breakpoints.large) {
+          translateYValue = 160
+        }
 
+        return `
+          transform: translateY(${translateYValue}px) translateX(${
+          windowWidth / 2 - 150
+        }px) scale(${scaleValue});
+        `
+      }
       return `
-        transform: translateY(${translateYValue}px) translateX(${
-        windowWidth / 2 - 150
-      }px) scale(${scaleValue});
+        transform: translateY(120px) translateX(${
+          windowWidth / 2 - 25
+        }px) scale(6);
       `
     }
   }}
@@ -87,19 +94,26 @@ const DownloadButton = styled.a`
   transition: all 300ms;
   box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
 
-  ${({ iAmAHack }) => {
+  ${({ iAmAHack, windowWidth }) => {
     if (typeof window === `undefined`) {
       return ""
     }
 
     if (iAmAHack) {
-      console.log("should be at top")
       return `
         transform: translateX(-10px) translateY(0);
       `
     } else {
-      console.log("should not be at top")
-      return `transform: translateX(calc(100vw / -2 + 80px)) translateY(250px)`
+      let translateYValue = 440
+      if (
+        windowWidth > breakpoints.small &&
+        windowWidth <= breakpoints.medium
+      ) {
+        translateYValue = 370
+      } else if (windowWidth > breakpoints.medium) {
+        translateYValue = 300
+      }
+      return `transform: translateX(calc(100vw / -2 + 58px)) translateY(${translateYValue}px)`
     }
   }}
 `

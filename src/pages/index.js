@@ -3,6 +3,9 @@ import React from "react"
 import styled from "styled-components"
 import { useWindowScroll, useWindowSize } from "react-use"
 
+import LeftScreenshotImage from "../images/screenshot-obs.jpg"
+import RightScreenshotImage from "../images/screenshot-app.jpg"
+
 import {
   RobotFilled,
   SettingFilled,
@@ -42,22 +45,6 @@ const HeroContent = styled.div`
     font-size: 40px;
   }
 `
-// for above maybe?
-// ${({ windowWidth }) => {
-//   let fontSizeValue = 24
-//   if (windowWidth > breakpoints.medium) {
-//     fontSizeValue = 32
-//   }
-//   if (windowWidth > breakpoints.large) {
-//     fontSizeValue = 40
-//   }
-
-//   return `
-//     h2 {
-//       font-size: ${fontSizeValue}px;
-//     }
-//   `
-// }}
 
 const ContentSection = styled.div`
   min-height: 400px;
@@ -201,18 +188,54 @@ const gettingStartedSteps = [
   },
 ]
 
+const HeroContainer = styled.div`
+  position: relative;
+`
+
+const LeftScreenshot = styled.div`
+  position: absolute;
+  left: 15%;
+  top: 0;
+  width: 400px;
+
+  img {
+    width: 100%;
+    height: auto;
+    border: 4px solid white;
+    box-shadow: 0px 03px 20px rgba(0, 0, 0, 0.42);
+    transform: perspective(400px) rotateY(32deg);
+  }
+`
+
+const RightScreenshot = styled(LeftScreenshot)`
+  left: auto;
+  right: 15%;
+
+  img {
+    transform: perspective(400px) rotateY(-32deg);
+  }
+`
+
 const IndexPage = () => {
   const { width: windowWidth } = useWindowSize()
 
   return (
     <Layout>
       <SEO title="Home" />
-      <HeroContent windowWidth={windowWidth}>
-        <Container>
-          <h2>Democracy In Action</h2>
-          <p>Engage your audience better during your next hosted event</p>
-        </Container>
-      </HeroContent>
+      <HeroContainer>
+        <LeftScreenshot>
+          <img src={LeftScreenshotImage} />
+        </LeftScreenshot>
+        <HeroContent windowWidth={windowWidth}>
+          <Container>
+            <h2>Democracy In Action</h2>
+            <p>Engage your audience better during your next hosted event</p>
+          </Container>
+        </HeroContent>
+        <RightScreenshot>
+          <img src={RightScreenshotImage} />
+        </RightScreenshot>
+      </HeroContainer>
       <ContentSection>
         <Container>
           <SectionIntro>
